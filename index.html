@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GaramShop - Tienda de Electrónica</title>
+    <style>
+        :root {
+            --blanco: #FFFFFF;
+            --gris-claro: #F2F2F2;
+            --gris: #E5E5E5;
+            --amarillo: #FFD700;
+            --gris-oscuro: #333333;
+            --azul: #6671e3;
+            --rojo: #f72a2a;
+      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--blanco);
+            color: var(--gris-oscuro);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--gris-oscuro);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+      .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 50%;
+            background-color: var(--gris);
+            padding: 5px;
+        }
+
+        .shop-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--blanco);
+        }
+
+        .highlight {
+            color: var(--amarillo);
+            font-weight: bold;
+        }
+
+        nav {
+            margin-left: auto;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gris-oscuro);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--amarillo);
+        }
+
+        .hero {
+            background-color: var(--amarillo);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--amarillo);
+        }
+
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+            margin: 2rem 0;
+        }
+
+        .product-card {
+            background-color: var(--blanco);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--gris);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: var(--gris-claro);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--amarillo);
+            margin-bottom: 1rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: var(--gris-oscuro);
+            font-size: 1rem;
+            margin-left: 0.5rem;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--amarillo);
+            color: var(--gris-oscuro);
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #c7bc46;
+        }
+
+        .special-offers {
+            background-color: var(--gris-claro);
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .contact {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 1px solid var(--gris);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        footer {
+            background-color: var(--gris-oscuro);
+            color: var(--blanco);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--blanco);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+            background-color: var(--amarillo);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .products-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                padding: 0 1rem;
+            }
+
+            .contact {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://tiermaker.com/images/media/template_images/2024/17696366/italian-brainrot-17696366/garamaraman-dan-madudungdung-tak-tuntung-perkuntung.png" class="logo">
+            <h1 class="shop-name">Garam<span class="highlight">Shop</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#catalogo">Catálogo</a></li>
+                <li><a href="#ofertas">Ofertas</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Tecnología de última generación, al mejor precio</h1>
+            <p>En GaramShop encontrarás los mejores productos electrónicos con garantía y soporte técnico especializado.</p>
+        </section>
+
+        <section id="catalogo">
+            <h2 class="section-title">Nuestro Catálogo</h2>
+            <div class="products-container">
+                <!-- Producto 1 -->
+                <article class="product-card">
+                    <img src="https://i.ebayimg.com/thumbs/images/g/0hUAAOSwmZRjsOfD/s-l1200.jpg" alt="Smartphone de última generación con pantalla grande y diseño delgado en color negro" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Telefono de Goofy PRO MAX</h3>
+                        <p class="product-description">Telefono Rustico con calidad de sonido envolvente</p>
+                        <p class="product-price">$777 <span class="original-price">$999</span></p>
+                        <button class="btn">Agregar al carrito</button>
+                    </div>
+                </article>
+
+                <!-- Producto 2 -->
+                <article class="product-card">
+                    <img src="https://i5.walmartimages.com/seo/HP-15-6-Ryzen-5-8GB-256GB-Laptop-Rose-Gold_36809cf3-480b-47a5-94f0-e1d5e70c58c0_3.fcc0d6494b0e279a13c32c80c28abfa3.jpeg" alt="Computadora portátil ultra delgada con pantalla táctil y teclado retroiluminado" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Laptop HP</h3>
+                        <p class="product-description">Intel Core i7, 16GB RAM, SSD 1TB, 14" Full HD</p>
+                        <p class="product-price">$1,299 <span class="original-price">$1,499</span></p>
+                        <button class="btn">Agregar al carrito</button>
+                    </div>
+                </article>
+
+                <!-- Producto 3 -->
+                <article class="product-card">
+                    <img src="https://www.steren.com.hn/media/catalog/product/cache/0236bbabe616ddcff749ccbc14f38bf2/image/22545a64c/audifonos-bluetooth-freepods-touch-true-wireless-con-active-noise-cancelling-y-enviromental-noise-cancelling.jpg" alt="Audífonos inalámbricos con cancelación de ruido y estuche de carga en color blanco" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Audífonos Pro Plus</h3>
+                        <p class="product-description">Cancelación de ruido activa, 30h de batería, carga inalámbrica</p>
+                        <p class="product-price">$199 <span class="original-price">$249</span></p>
+                        <button class="btn">Agregar al carrito</button>
+                    </div>
+                </article>
+
+                <!-- Producto 4 -->
+                <article class="product-card">
+                    <img src="https://m.media-amazon.com/images/I/81SKz8scLKL._AC_SL1500_.jpg" alt="Reloj inteligente con pantalla circular y correa negra de silicona para monitoreo de salud" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Aple Cars wach</h3>
+                        <p class="product-description">Monitoreo cardiaco, oxígeno en sangre, resistencia al agua, años de vida</p>
+                        <p class="product-price">$149 <span class="original-price">$179</span></p>
+                        <button class="btn">Agregar al carrito</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="ofertas" class="special-offers">
+            <h2 class="section-title">Ofertas Especiales</h2>
+            <div class="products-container">
+                <!-- Oferta 1 -->
+                <article class="product-card">
+                    <div style="position: relative;">
+                        <img src="https://de2kqc9pq55cj.cloudfront.net/fit-in/500x500/filters:fill(FFFFFF):quality(90):format(webp)/_img_productos/tablet-samsung-galaxy-tab-s6-lite-2022-foto9--1699458876.jpg" alt="Tablet con pantalla HD y lápiz digital incluido en oferta especial" class="product-image">
+                        <div style="position: absolute; top: 10px; right: 10px; background-color: var(--amarillo); color: var(--gris-oscuro); padding: 0.3rem 0.6rem; border-radius: 4px; font-weight: bold;">
+                            30% OFF
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Tablet Pro Max</h3>
+                        <p class="product-description">10.5" Retina, 128GB, Lápiz digital incluido</p>
+                        <p class="product-price">$299 <span class="original-price">$429</span></p>
+                        <button class="btn">Aprovechar Oferta</button>
+                    </div>
+                </article>
+
+                <!-- Oferta 2 -->
+                <article class="product-card">
+                    <div style="position: relative;">
+                        <img src="https://www.circuit.com.uy/images/thumbs/0005275_parlante-jbl-boombox_550.jpeg" alt="Parlante inalámbrico portátil resistente al agua con iluminación LED" class="product-image">
+                        <div style="position: absolute; top: 10px; right: 10px; background-color: var(--amarillo); color: var(--gris-oscuro); padding: 0.3rem 0.6rem; border-radius: 4px; font-weight: bold;">
+                            25% OFF
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Parlante JBL</h3>
+                        <p class="product-description">20W, Bluetooth 5.0, IPX7 resistente al agua y a la lava</p>
+                        <p class="product-price">$89 <span class="original-price">$119</span></p>
+                        <button class="btn">Aprovechar Oferta</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact">
+            <h2 class="section-title">Contáctanos</h2>
+            <p>¿Tienes alguna pregunta? Completa el formulario y te responderemos a la brevedad.</p>
+            
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Asunto</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Mensaje</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn">Enviar Mensaje</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <h3>GaramShop</h3>
+        <p>Tu tienda de confianza en productos electrónicos de alta gama</p>
+        
+        <div class="social-links">
+            <a href="#" class="social-icon">FB</a>
+            <a href="#" class="social-icon">IG</a>
+            <a href="#" class="social-icon">TW</a>
+            <a href="#" class="social-icon">YT</a>
+        </div>
+        
+        <p>© 1830 A.C. GaramShop. Todos los derechos reservados a Juan y Mauro.</p>
+    </footer>
+
+    <script>
+        // Validación del formulario
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if(name && email && subject && message) {
+                alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+                this.reset();
+            } else {
+                alert('Por favor completa todos los campos del formulario.');
+            }
+        });
+    </script>
+</body>
+</html>
